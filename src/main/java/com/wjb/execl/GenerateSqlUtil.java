@@ -116,7 +116,7 @@ public class GenerateSqlUtil {
      */
     public List<Map<String,Object>> readExcel() {
         List<Map<String,Object>> result = new ArrayList<>();
-        File file = new File("C:\\Users\\Admin\\Desktop\\1.xlsx");
+        File file = new File("src/main/resources/excel/1.xlsx");
         Workbook book = WorkbookUtil.createBook(file);
         int sheetNum = book.getNumberOfSheets();
         for (int i = 0; i < sheetNum; i++) {
