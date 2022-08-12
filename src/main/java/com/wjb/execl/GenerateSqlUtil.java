@@ -43,8 +43,9 @@ public class GenerateSqlUtil {
                 if(entity.getFiledType()==null){
                     continue;
                 }
-                System.out.println(entity.getFiledName()+" "+entity.getFiledType());
+
                 String fieldTypeByDesc = FiledTypeEnum.getFieldTypeByDesc(entity.getFiledType().trim(), entity.getLength());
+                System.out.println(entity.getFiledName()+" "+entity.getFiledType()+" "+fieldTypeByDesc);
 
                 sb.append(String.format("\t%s %s", entity.getFiledName(),FiledTypeEnum.getFieldTypeByDesc(entity.getFiledType().trim(),entity.getLength())));
                 String type = entity.getFiledType();
@@ -53,6 +54,7 @@ public class GenerateSqlUtil {
                 //设置主键
                 if (notes.contains("主键")){
                     sb.append(" PRIMARY KEY");
+                    sb.append(" AUTO_INCREMENT");
                 }else {
                     //字符串、文本设置编码
                     //主键类型为字符时，不设置编码

@@ -14,6 +14,7 @@ public enum FiledTypeEnum {
     INT("int","整型",1),
     BIGINT("bigint","长整型",20),
     DATETIME("datetime","日期时间型",0),
+    DATE("date","日期型",null),
     DOUBLE("double","浮点型",10)
     ;
     /**
@@ -34,9 +35,13 @@ public enum FiledTypeEnum {
 
     public static String getFieldTypeByDesc(String desc, Integer length){
         for (FiledTypeEnum item : FiledTypeEnum.values()) {
-            if (desc.contains(item.desc)) {
+            if (desc.trim().equals(item.desc)) {
                 if (length==null){
                     length = item.getDefaultLength();
+                }
+
+                if (length==null){
+                    return item.getFiledType();
                 }
                 if (item.getFiledType().equals(DOUBLE.getFiledType())){
                     return item.getFiledType()+"("+length+",2)";
