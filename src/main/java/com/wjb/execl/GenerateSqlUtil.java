@@ -40,7 +40,7 @@ public class GenerateSqlUtil {
             sb.append(String.format("CREATE TABLE %s (\n", tableName));
             for (int i = 0; i < size; i++) {
                 ExcelEntity entity = list.get(i);
-                if(entity.getFiledType()==null){
+                if(entity.getFiledType()==null || entity.getFiledType()==""){
                     continue;
                 }
 
@@ -103,6 +103,7 @@ public class GenerateSqlUtil {
         Row titleRow = sheet.getRow(0);
         String title = titleRow.getCell(0).toString();
         map.put("tableName",title.split(":")[1]);
+        System.out.println("处理表"+title);
         map.put("tableNotes",title.split(":")[0]);
         //第二行是标题，不读取。第三行开始才是数据
         int lastRowNum = sheet.getLastRowNum();
@@ -129,11 +130,12 @@ public class GenerateSqlUtil {
     }
 
     private ExcelEntity getEntity(Row row){
+
         ExcelEntity entity = new ExcelEntity();
         //列数：6列，分别是字段名称、字段代码、字段类型、字段长度、约束条件、说明
         for (int j = 0; j < 5; j++) {
-            String str = row.getCell(j).toString();
-            if (StrUtil.isNotBlank(str)){
+            if (row!=null && row.getCell(j)!=null){
+                String str = row.getCell(j).toString();
                 switch (j){
                     case 0:
                         entity.setNotes((str+" "+row.getCell(5).toString()).replace("\r","").replace("\n",""));
@@ -145,7 +147,7 @@ public class GenerateSqlUtil {
                         entity.setFiledType(str);
                         break;
                     case 3:
-                        entity.setLength(Integer.parseInt(str.trim().replace(".0","")));
+                        entity.setLength((str.trim()!=null && str.trim()!="")? Integer.parseInt(str.trim().replace(".0","")):0);
                         break;
                     case 4:
                         entity.setConstraint(str);
