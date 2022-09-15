@@ -44,7 +44,7 @@ public enum FiledTypeEnum {
                     return item.getFiledType();
                 }
                 if (item.getFiledType().equals(DOUBLE.getFiledType())){
-                    return item.getFiledType()+"("+length+",2)";
+                    return item.getFiledType()+"("+length+",6)";
                 }else {
                     return item.getFiledType()+"("+length+")";
                 }
