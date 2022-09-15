@@ -119,7 +119,7 @@ public class GenerateSqlUtil {
      */
     public List<Map<String,Object>> readExcel() {
         List<Map<String,Object>> result = new ArrayList<>();
-        File file = new File("src/main/resources/excel/1.xlsx");
+        File file = new File("src/main/resources/excel/环境卫生-垃圾收集设施.xlsx");
         Workbook book = WorkbookUtil.createBook(file);
         int sheetNum = book.getNumberOfSheets();
         for (int i = 0; i < sheetNum; i++) {
@@ -147,7 +147,7 @@ public class GenerateSqlUtil {
                         entity.setFiledType(str);
                         break;
                     case 3:
-                        entity.setLength((str.trim()!=null && str.trim()!="")? Integer.parseInt(str.trim().replace(".0","")):0);
+                        entity.setLength((str.trim()!=null && str.trim()!="")? Integer.parseInt(str.trim().replace(".0","")):null);
                         break;
                     case 4:
                         entity.setConstraint(str);
