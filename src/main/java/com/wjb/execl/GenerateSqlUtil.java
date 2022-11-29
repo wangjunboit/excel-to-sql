@@ -62,8 +62,16 @@ public class GenerateSqlUtil {
                         sb.append(" CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
                     }
                 }
+
+
                 if (constraint.contains("M")){
-                    sb.append(" NOT NULL COMMENT ");
+                    if ("SJGXSJ".equalsIgnoreCase(entity.getFiledName())){
+                        sb.append(" NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT ");
+                    }else if ("SJCJSJ".equalsIgnoreCase(entity.getFiledName())){
+                        sb.append(" NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT ");
+                    }else {
+                        sb.append(" NOT NULL COMMENT ");
+                    }
                 }else {
                     sb.append(" NULL DEFAULT NULL COMMENT ");
                 }
@@ -119,7 +127,9 @@ public class GenerateSqlUtil {
      */
     public List<Map<String,Object>> readExcel() {
         List<Map<String,Object>> result = new ArrayList<>();
-        File file = new File("src/main/resources/excel/环境卫生-建筑垃圾监管.xlsx");
+        File file = new File("src/main/resources/excel/城市容貌.xlsx");
+        //File file = new File("src/main/resources/excel/城市建设-排水信息.xlsx");
+        //File file = new File("src/main/resources/excel/环境卫生-建筑垃圾监管.xlsx");
         //File file = new File("src/main/resources/excel/环境卫生-垃圾处理设施.xlsx");
         //File file = new File("src/main/resources/excel/环境卫生-生活垃圾分类监管.xlsx");
         //File file = new File("src/main/resources/excel/环境卫生-城市公厕监管.xlsx");

@@ -11,11 +11,12 @@ import org.apache.bcel.generic.INEG;
 @Getter
 public enum FiledTypeEnum {
     VARCHAR("varchar","字符型",10),
-    INT("int","整型",1),
+    INT("int","整型",11),
     BIGINT("bigint","长整型",20),
     DATETIME("datetime","日期时间型",0),
     DATE("date","日期型",null),
-    DOUBLE("double","浮点型",10)
+    //DOUBLE("double","浮点型",10),
+    DECIMAL("decimal","浮点型",16),
     ;
     /**
      * 字段类型
@@ -43,7 +44,7 @@ public enum FiledTypeEnum {
                 if (length==null){
                     return item.getFiledType();
                 }
-                if (item.getFiledType().equals(DOUBLE.getFiledType())){
+                if (item.getFiledType().equals(DECIMAL.getFiledType())){
                     return item.getFiledType()+"("+length+",6)";
                 }else {
                     return item.getFiledType()+"("+length+")";
